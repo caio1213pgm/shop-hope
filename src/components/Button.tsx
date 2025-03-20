@@ -1,6 +1,6 @@
 import { ComponentProps } from "react";
 
-type buttonProps = ComponentProps<"button">
+export type buttonProps = ComponentProps<"button">
 
 function Button({...props}: buttonProps) {
     return (
