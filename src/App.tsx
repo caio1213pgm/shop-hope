@@ -1,12 +1,43 @@
 import "./App.css";
+import ButtonCart from "./components/ButtonCart";
+import ContainerProducts from "./components/ContainerProducts";
+import Product, { productProps } from "./components/Product";
+import Design from "./layout/Design";
+import { useEffect, useState } from "react";
 
 function App() {
+  const [products, setProducts] = useState<productProps[]>([]);
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const response = await fetch("products.json");
+        const data = await response.json();
+        setProducts(data);
+      } catch (error) {
+        console.error("erro ao buscar produtos", error);
+      }
+    };
+    fetchProducts();
+  }, []);
+
   return (
     <>
-      <div className="bg-blue-300">
-        <h1 className="text-4xl text-white-500 ">Hello world</h1>
-      </div>
-      
+      <Design>
+        <ContainerProducts>
+          {products.map((product) => (
+            <Product
+              key={product.id}
+              name={product.name}
+              price={product.price}
+              description={product.description}
+              image={product.image}
+              id={product.id}
+            />
+          ))}
+        </ContainerProducts>
+        <ButtonCart />
+      </Design>
     </>
   );
 }
