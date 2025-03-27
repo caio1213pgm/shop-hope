@@ -6,9 +6,9 @@ import { NavLink } from "react-router";
 function Header() {
   return (
     <header>
-      <div className="w-full bg-blue-400 py-4 px-4 flex items-center justify-between">
+      <div className="w-full bg-blue-700 py-4 px-4 flex items-center justify-between">
         <NavLink to="/">
-          <h2 className="text-white text-2xl font-medium hover:text-3xl transition-all duration-600 cursor-pointer">
+          <h2 className="text-white text-2xl font-medium hover:scale-125 transition-all duration-600 cursor-pointer">
             SHOPHOPE
           </h2>
         </NavLink>
