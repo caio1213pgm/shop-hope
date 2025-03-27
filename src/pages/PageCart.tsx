@@ -1,8 +1,8 @@
 import Design from "../layout/Design";
 import ButtonReturn from "../components/ButtonReturn";
-// import ButtonTrash from "../components/ButtonTrash";
+import ButtonTrash from "../components/ButtonTrash";
 import { ShoppingBag, Wind } from "lucide-react";
-// import useCart from "../context/useCart";
+import useCart from "../context/useCart";
 
 export function TitleCart() {
   return (
@@ -29,27 +29,27 @@ export function EmptyCart() {
 }
 
 function PageCart() {
-  // const { cart } = useCart();
+  const { cart, removeItemFromCart } = useCart();
 
   return (
     <Design>
       <div className="bg-blue-300 flex justify-center pt-20 px-20">
         <ButtonReturn />
         <div className="flex flex-col bg-white px-10 py-20 rounded min-h-130 min-w-250 ">
-          {/* {cart.length === 0 ? <EmptyCart /> : <TitleCart />} */}
+          {cart.length === 0 ? <EmptyCart /> : <TitleCart />}
           <div className="bg-white-100 rounded">
-            {/* {cart.map((item) => (
+            {cart.map((item) => (
               <div className="flex w-full px-5 py-2 items-center gap-3">
                 <div className="w-[100px]">
-                  <img src={item.image} alt="" />
+                  <img src={String(item.image)} alt="" />
                 </div>
                 <div>
                   <p>{item.name}</p>
                   <p>{item.description}</p>
                 </div>
-                <ButtonTrash action={() => console.log("apagou")} />
+                <ButtonTrash action={() => removeItemFromCart(item)} />
               </div>
-            ))} */}
+            ))}
           </div>
         </div>
       </div>

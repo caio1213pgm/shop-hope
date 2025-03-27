@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-expressions */
 import Button from "../components/Button";
 import ButtonReturn from "../components/ButtonReturn";
 import Design from "../layout/Design";
@@ -5,6 +6,8 @@ import { useSearchParams } from "react-router";
 import ButtonCart from "../components/ButtonCart";
 import { itemProps } from "../context/cartContext";
 import useCart from "../context/useCart";
+import { useRef } from "react";
+import DialogContent from "../components/DialogContent";
 function PageProduct() {
   const [searchParams] = useSearchParams();
   const name = searchParams.get("name");
@@ -13,17 +16,29 @@ function PageProduct() {
   const description = searchParams.get("description");
   const id = searchParams.get("id");
 
-  const {addItemToCart} = useCart()
+  const { addItemToCart } = useCart();
+  const diagloRef = useRef<HTMLDialogElement>(null);
 
-  function addToCart({name, price, image, description, id}: itemProps) {
+  function toggleDialog() {
+    if (!diagloRef.current) {
+      return;
+    }
+
+    diagloRef.current.hasAttribute("open")
+      ? diagloRef.current.close()
+      : diagloRef.current.showModal();
+  }
+
+  function addToCart({ name, price, image, description, id }: itemProps) {
     const item: itemProps = {
       name: name,
       price: price,
       image: image,
       description: description,
-      id: id
-    }
-    addItemToCart(item)
+      id: id,
+    };
+    addItemToCart(item);
+    toggleDialog();
   }
 
   return (
@@ -40,14 +55,18 @@ function PageProduct() {
             </span>
             <p className="text-xl mb-2">{description}</p>
 
-            <Button onClick={() => addToCart({name, price, image, description, id})}>
+            <Button
+              onClick={() => addToCart({ name, price, image, description, id })}
+            >
               Adicionar ao carrinho
             </Button>
-
+            <dialog ref={diagloRef} className="m-auto outline-0 rounded-2xl">
+              <DialogContent action={() => toggleDialog()} />
+            </dialog>
           </div>
         </div>
       </div>
-      <ButtonCart/>
+      <ButtonCart />
     </Design>
   );
 }
