@@ -23,7 +23,7 @@ function Product({ name, price, image, description, id }: productProps) {
   }
   return (
     <div
-      className="flex flex-col items-center justify-center bg-blue-400 p-4 w-[300px] cursor-pointer rounded-xl transition-all duration-700 hover:w-[350px] hover:p-5"
+      className="flex flex-col items-center justify-center bg-blue-700 text-white p-4 w-[300px] cursor-pointer rounded-xl transition-all duration-700 hover:w-[350px] hover:scale-95"
       onClick={() => teste({ name, price, image, description, id })}
     >
       <div className="w-3xs ">
