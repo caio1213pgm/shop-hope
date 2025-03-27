@@ -4,7 +4,7 @@ function ButtonTrash({ action }: {action: () => void}) {
   return (
     <div>
       <button onClick={action} className="cursor-pointer ">
-        <Trash2 className=" size-10 transition-all duration-400 hover:size-16"/>
+        <Trash2 className=" size-10 transition-all duration-400 hover:scale-150"/>
       </button>
     </div>
   );
