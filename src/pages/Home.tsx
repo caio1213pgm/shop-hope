@@ -1,11 +1,11 @@
-import "./App.css";
-import ButtonCart from "./components/ButtonCart";
-import ContainerProducts from "./components/ContainerProducts";
-import Product, { productProps } from "./components/Product";
-import Design from "./layout/Design";
+import "../App.css";
+import ButtonCart from "../components/ButtonCart";
+import ContainerProducts from "../components/ContainerProducts";
+import Product, { productProps } from "../components/Product";
+import Design from "../layout/Design";
 import { useEffect, useState } from "react";
 
-function App() {
+function Home() {
   const [products, setProducts] = useState<productProps[]>([]);
 
   useEffect(() => {
@@ -42,4 +42,4 @@ function App() {
   );
 }
 
-export default App;
+export default Home;
