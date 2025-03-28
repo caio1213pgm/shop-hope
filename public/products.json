@@ -1,0 +1,51 @@
+[
+  {
+    "name": "Iphone 16 plus",
+    "price": "5.300,00",
+    "image": "https://imgs.casasbahia.com.br/55067453/1g.jpg?imwidth=1000",
+    "description": "O Apple iPhone 16 Plus é um smartphone iOS com características inovadoras que o tornam uma excelente opção para qualquer tipo de utilização, representando um dos melhores dispositivos móveis já feitos",
+    "id": "1"
+  },
+  {
+    "name": "Iphone 14 plus",
+    "price": "3.990,50",
+    "image": "https://imgs.casasbahia.com.br/55054431/1g.jpg?imwidth=1000",
+    "description": "O Apple iPhone 14 Plus é um smartphone iOS com características inovadoras que o tornam uma excelente opção para qualquer tipo de utilização, representando um dos melhores dispositivos móveis já feitos.",
+    "id": "2"
+  },
+  {
+    "name": "Samsung Galaxy s23",
+    "price": "3.099,00",
+    "image": "https://imgs.casasbahia.com.br/1568174698/1xg.jpg?imwidth=500",
+    "description": "O Celular Samsung Galaxy S23 128GB é um smartphone que chega para elevar sua experiência multimídia, trazendo um conjunto de câmeras capaz de potencializar sua criatividade",
+    "id": "3"
+  },
+  {
+    "name": "Samsung Galaxy S25 5G",
+    "price": "6.750,00",
+    "image": "https://imgs.casasbahia.com.br/55068426/1g.jpg?imwidth=500",
+    "description": "O Samsung Galaxy S25 é um smartphone Android com características inovadoras que o tornam uma excelente opção para qualquer tipo de utilização, representando um dos melhores dispositivos móveis já feitos.",
+    "id": "4"
+  },
+  {
+    "name": "Iphone 15 plus",
+    "price": "4.350,80",
+    "image": "https://imgs.casasbahia.com.br/1569846312/1xg.jpg?imwidth=1000",
+    "description": "O Apple iPhone 15 Plus é um smartphone iOS com características inovadoras que o tornam uma excelente opção para qualquer tipo de utilização, representando um dos melhores dispositivos móveis já feitos.",
+    "id": "5"
+  },
+  {
+    "name": "Samsung Galaxy S24 Ultra",
+    "price": "6.650,00",
+    "image": "https://imgs.casasbahia.com.br/55065369/1g.jpg?imwidth=500",
+    "description": "O Galaxy S24 é ultra em tudo, com 256GB de armazenamento, inteligência artificial e uma tela deslumbrante de 6.8. Com 12GB de RAM e o processador Snapdragon 8 Gen 3, você terá um desempenho imbatível para jogos e multitarefa.",
+    "id": "6"
+  },
+  {
+    "name": "Realme C75 4G ",
+    "price": "1.699,00",
+    "image": "https://acdn-us.mitiendanube.com/stores/004/891/876/products/c87a161dd4381695d414a54dfef94b13-4121ef5d3eb73de9b917370514533281-1024-1024.webp",
+    "description": "Apresentamos o Realme C75, um smartphone que combina tecnologia avançada e performance robusta, perfeito para os mais exigentes. Com 8 GB de RAM e 256 GB de armazenamento interno, ele oferece o espaço e a velocidade que você precisa para armazenar seus aplicativos e arquivos sem preocupações.",
+    "id": "7"
+  }
+]
