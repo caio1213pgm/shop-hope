@@ -1,54 +1,60 @@
-# React + TypeScript + Vite
+# SHOP-HOPE 🛒
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Essa é uma loja online desenvolvido em **React.ts**. Aqui você pode encontrar uma variedade de smartphones. Cada produto tem uma descrição, preço e uma imagem. Você pode filtrar os produtos pelo nome. Além disso, você pode adicionar produtos ao carrinho. A funcionalidade de login e finalizar compra será adcionada em breve.
 
-Currently, two official plugins are available:
+## 📌 Funcionalidade
+- **Listar Produtos**: Você pode ver todos os produtos disponíveis na loja.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Filtrar Produtos**: Você pode filtrar os produtos pelo nome.
 
-## Expanding the ESLint configuration
+- **Adicionar ao Carrinho**: Você pode adicionar produtos ao carrinho.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- **Carrinho**: Você pode ver os produtos adicionados ao carrinho.
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+
+## 🛠️ Tecnologias Utilizadas
+
+- **React**: Biblioteca JavaScript para criar interfaces de usuário.
+
+- **TypeScript**: Linguagem de programação que adiciona tipos estáticos a JavaScript.
+
+- **Tailwind CSS**: Biblioteca CSS para estilizar a aplicação.
+
+- **React Router**: Biblioteca para gerenciar rotas na aplicação.
+
+## 📷 Imagens da Aplicação
+
+home
+![imagem da home da página](image.png)
+
+produto
+![imagem de um dos produtos](image-2.png)
+
+carrinho vazio
+![imagem do carrinho vazio](image-1.png)
+
+carrinho com produtos
+![imagem do carrinho com produtos](image-3.png)
+
+## 🚀 Como executar o projeto
+
+1️⃣ **Clone o repositório**  
+Abra o terminal e execute:
+```sh
+git clone https://github.com/caio1213pgm/shop-hope.git
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+2️⃣ **Acesse o diretório do projeto**
+````sh
+cd shop-hope
+````
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+3️⃣ **Instale as dependências**
+````sh
+npm install
+````
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+4️⃣ **Inicie o servidor de desenvolvimento**
+````sh
+npm run dev
+````
