@@ -2,8 +2,10 @@ import { CircleUser } from "lucide-react";
 import { Search } from "lucide-react";
 import { ContainerSearch, InputSearch } from "../components/InputGroup";
 import { NavLink } from "react-router";
+import { useSearch } from "../context/searchContext";
 
 function Header() {
+  const { search, setSearch } = useSearch();
   return (
     <header>
       <div className="w-full bg-blue-700 py-4 px-4 flex items-center justify-between">
@@ -14,7 +16,12 @@ function Header() {
         </NavLink>
 
         <ContainerSearch>
-          <InputSearch placeholder="Buscar na ShopHope" type="text" />
+          <InputSearch
+            placeholder="Buscar na ShopHope"
+            type="search"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+          />
           <span className="p-2 cursor-pointer">
             <Search />
           </span>

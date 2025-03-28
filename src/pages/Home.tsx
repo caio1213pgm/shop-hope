@@ -1,12 +1,17 @@
+// import { Search } from "lucide-react";
 import "../App.css";
 import ButtonCart from "../components/ButtonCart";
 import ContainerProducts from "../components/ContainerProducts";
+// import { ContainerSearch, InputSearch } from "../components/InputGroup";
 import Product, { productProps } from "../components/Product";
+import { useSearch } from "../context/searchContext";
 import Design from "../layout/Design";
 import { useEffect, useState } from "react";
 
 function Home() {
-  const [products, setProducts] = useState<productProps[]>([]);
+  const [productsApi, setProducts] = useState<productProps[]>([]);
+
+  const {search} = useSearch()
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -20,6 +25,10 @@ function Home() {
     };
     fetchProducts();
   }, []);
+
+  const products = productsApi.filter((product) =>
+    product.name.toLowerCase().includes(search.toLowerCase())
+  );
 
   return (
     <>
