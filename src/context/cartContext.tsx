@@ -15,7 +15,7 @@ type propsContext = {
   removeProduct: (product: itemProps) => void;
 };
 
-export const CartContext = createContext<propsContext>({
+const CartContext = createContext<propsContext>({
   cart: [],
   addProduct: () => {},
   removeProduct: () => {},
