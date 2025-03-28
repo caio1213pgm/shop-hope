@@ -25,16 +25,16 @@ Essa é uma loja online desenvolvido em **React.ts**. Aqui você pode encontrar 
 ## 📷 Imagens da Aplicação
 
 home
-![imagem da home da página](image.png)
+![imagem da home da página](src/assets/imageGit/image.png)
 
 produto
-![imagem de um dos produtos](image-2.png)
+![imagem de um dos produtos](src/assets/imageGit/image-2.png)
 
 carrinho vazio
-![imagem do carrinho vazio](image-1.png)
+![imagem do carrinho vazio](src/assets/imageGit/image-1.png)
 
 carrinho com produtos
-![imagem do carrinho com produtos](image-3.png)
+![imagem do carrinho com produtos](src/assets/imageGit/image-3.png)
 
 ## 🚀 Como executar o projeto
 
