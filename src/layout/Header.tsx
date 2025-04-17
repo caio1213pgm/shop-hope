@@ -1,8 +1,8 @@
-import { CircleUser } from "lucide-react";
 import { Search } from "lucide-react";
 import { ContainerSearch, InputSearch } from "../components/InputGroup";
 import { NavLink } from "react-router";
 import { useSearch } from "../context/searchContext";
+import LoginDiv from "../components/LoginDiv";
 
 function Header() {
   const { search, setSearch } = useSearch();
@@ -27,10 +27,7 @@ function Header() {
           </span>
         </ContainerSearch>
 
-        <div className="flex items-center justify-between gap-3">
-          <p className="text-xl text-white">Login</p>
-          <CircleUser size={32} color="white" />
-        </div>
+        <LoginDiv/>
       </div>
     </header>
   );
