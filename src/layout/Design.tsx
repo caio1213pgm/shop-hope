@@ -3,17 +3,17 @@ import Header from "./Header";
 import Footer from "./Footer";
 
 export type PropsChildren = {
-	children: React.ReactNode | ReactElement | ReactPortal;
+  children: React.ReactNode | ReactElement | ReactPortal;
 };
 
 function Design({ children }: PropsChildren) {
-	return (
-		<>
-			<Header />
-			{children}
-			<Footer />
-		</>
-	);
+  return (
+    <>
+      <Header />
+      {children}
+      <Footer />
+    </>
+  );
 }
 
 export default Design;
