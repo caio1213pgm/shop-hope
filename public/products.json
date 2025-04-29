@@ -14,7 +14,7 @@
     "id": "2"
   },
   {
-    "name": "Samsung Galaxy s23",
+    "name": "Samsung Galaxy S23",
     "price": "3.099,00",
     "image": "https://imgs.casasbahia.com.br/1568174698/1xg.jpg?imwidth=500",
     "description": "O Celular Samsung Galaxy S23 128GB é um smartphone que chega para elevar sua experiência multimídia, trazendo um conjunto de câmeras capaz de potencializar sua criatividade",
@@ -47,5 +47,19 @@
     "image": "https://acdn-us.mitiendanube.com/stores/004/891/876/products/c87a161dd4381695d414a54dfef94b13-4121ef5d3eb73de9b917370514533281-1024-1024.webp",
     "description": "Apresentamos o Realme C75, um smartphone que combina tecnologia avançada e performance robusta, perfeito para os mais exigentes. Com 8 GB de RAM e 256 GB de armazenamento interno, ele oferece o espaço e a velocidade que você precisa para armazenar seus aplicativos e arquivos sem preocupações.",
     "id": "7"
+  },
+  {
+    "name": "Xiaomi Redmi 14C",
+    "price": "1.444,99",
+    "image": "https://imgs.casasbahia.com.br/1570246671/1xg.jpg?imwidth=500",
+    "description": "A maior e melhor tela de série com 120Hz. Fotos nítidas em qualquer condição, preservando suas memórias com alta qualidade de imagem. Armazenamento e desempenho poderosos. Sistema otimizado para eficiência energética mais bateria de longa duração com 5160mAh e carregamento USB-C. Tudo isso com acesso à livros digitais que somente a Xiaomi oferece.",
+    "id": "8"
+  },
+  {
+    "name": "Redmi Buds 6",
+    "price": "190,00",
+    "image": "https://imgs.casasbahia.com.br/1570738403/1xg.jpg?imwidth=500",
+    "description": "Sinta a música, não os fones. Dos graves profundos aos agudos cristalinos, Sua voz cristalina - Redução de ruído ambiente para sua fala durante chamadas, tenha maior clareza na voz. Até impressionantes 30 horas de bateria para curtir dias inteiros de música",
+    "id": "9"
   }
 ]
