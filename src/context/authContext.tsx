@@ -52,13 +52,13 @@ export default function AuthProvider({ children }: { children: React.ReactNode }
       const hasUser = users.filter((user) => user.email === email);
 
       if (hasUser.length > 0) {
-        if (hasUser[0].password === password) {
+        if (hasUser[0].password === password && hasUser[0].username === username) {
           const token = Math.random().toString(36).substring(2);
           localStorage.setItem("user_token", JSON.stringify({ email, token }));
           setUser({ email, password, username });
           return;
         } else {
-          return "email ou senha incorretos";
+          return "email, senha ou nome de usuário incorretos";
         }
       } else {
         return "nenhum usuário cadastrado";
