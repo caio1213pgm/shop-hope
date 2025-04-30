@@ -4,6 +4,7 @@ import PageProduct from "../pages/PageProduct";
 import PageCart from "../pages/PageCart";
 import LoginPage from "../pages/Login";
 import RegisterPage from "../pages/Register";
+import Account from "../pages/Account";
 
 export default function MainRoutes() {
   return (
@@ -14,6 +15,7 @@ export default function MainRoutes() {
         <Route path="/cart" element={<PageCart />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage/>}/>
+        <Route path="/account" element={<Account/>}/>
       </Routes>
     </BrowserRouter>
   );
