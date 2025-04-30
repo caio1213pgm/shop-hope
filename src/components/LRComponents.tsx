@@ -6,10 +6,10 @@ export function Label({...props}: labelProps) {
     <label {...props} className="w-full text-2xl text-white" />
   )
 }
-type formProps = ComponentProps<"form">;
-export function Form({...props}: formProps) {
+type divFormProps = ComponentProps<"div">;
+export function DivForm({...props}: divFormProps) {
   return (
-    <form className="flex flex-col gap-5 w-[550px] p-5 py-10 items-center justify-center bg-blue-700 rounded-xl" {...props}/>
+    <div className="flex flex-col gap-5 w-[550px] p-5 py-10 items-center justify-center bg-blue-700 rounded-xl" {...props}/>
   )
 }
 
