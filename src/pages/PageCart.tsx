@@ -3,6 +3,7 @@ import ButtonReturn from "../components/ButtonReturn";
 import ButtonTrash from "../components/ButtonTrash";
 import { ShoppingBag, Wind } from "lucide-react";
 import useCart from "../context/useCart";
+import { itemProps } from "../context/cartContext";
 
 export function TitleCart() {
   return (
@@ -23,13 +24,38 @@ export function EmptyCart() {
         <h2 className="text-2xl">Seu carrinho está vazio...</h2>
       </span>
 
-      <h3 className="text-xl">Dê uma olhada na nossa loja e faça suas primeiras compras</h3>
+      <h3 className="text-xl">
+        Dê uma olhada na nossa loja e faça suas primeiras compras
+      </h3>
     </div>
   );
 }
 
 function PageCart() {
   const { cart, removeItemFromCart } = useCart();
+
+  function calculateCartValue(cart: itemProps[]) {
+    let valueCart = 0;
+    cart.forEach((item) => {
+      console.log(typeof item.price, item.price);
+      if (item.price !== null) {
+        // eslint-disable-next-line prefer-const
+        let valueItem = parseFloat(item.price)
+        if(valueItem > 100){
+          return valueCart = valueCart + valueItem
+        }else{
+          return valueCart = (valueItem * 1000)
+        }
+      }
+    });
+
+    const formatter = new Intl.NumberFormat("pt-BR", {
+      style: "currency",
+      currency: "BRL",
+    });
+
+    return formatter.format(valueCart);
+  }
 
   return (
     <Design>
@@ -50,6 +76,13 @@ function PageCart() {
                 <ButtonTrash action={() => removeItemFromCart(item)} />
               </div>
             ))}
+          </div>
+          <div className="text-2xl flex justify-end bg-white-100">
+            {cart.length > 0 ? (
+              <p>Valor total: {calculateCartValue(cart)}</p>
+            ) : (
+              <p></p>
+            )}
           </div>
         </div>
       </div>
