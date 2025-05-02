@@ -3,7 +3,7 @@ import { createContext, useContext, useEffect, useState } from "react";
 type userProps = {
   email: string;
   password: string;
-  username: string
+  username?: string
 };
 
 type authProps = {
@@ -14,7 +14,7 @@ type authProps = {
 };
 
 const AuthContext = createContext<authProps>({
-  user: { email: "", password: "" , username: ""},
+  user: { email: "", password: ""},
   SingIn: () => "",
   SingUp: () => "",
   SingOut: () => [],
@@ -44,7 +44,7 @@ export default function AuthProvider({ children }: { children: React.ReactNode }
     }
   }, []);
 
-  function SingIn({ email, password, username }: userProps): string | void {
+  function SingIn({ email, password }: userProps): string | void {
     const usersStorage = localStorage.getItem("users_bd");
 
     if (usersStorage) {
@@ -52,8 +52,9 @@ export default function AuthProvider({ children }: { children: React.ReactNode }
       const hasUser = users.filter((user) => user.email === email);
 
       if (hasUser.length > 0) {
-        if (hasUser[0].password === password && hasUser[0].username === username) {
+        if (hasUser[0].password === password) {
           const token = Math.random().toString(36).substring(2);
+          const username: string | undefined = hasUser[0].username
           localStorage.setItem("user_token", JSON.stringify({ email, token }));
           setUser({ email, password, username });
           return;
