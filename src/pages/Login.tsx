@@ -12,7 +12,6 @@ import { useAuth } from "../context/authContext";
 export type formProps = {
   email?: string;
   password?: string;
-  username?: string;
 };
 
 function LoginPage() {
@@ -23,13 +22,12 @@ function LoginPage() {
   const [type, setType] = useState<boolean>(true);
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
-  const [username, setUsername] = useState<string>("");
   const [error, setError] = useState<string>("");
 
-  function loginUser({ email, password, username }: formProps) {
+  function loginUser({ email, password }: formProps) {
     try {
-      if (email && password && username) {
-        const res = SingIn({ email, password, username });
+      if (email && password) {
+        const res = SingIn({ email, password });
         if (res) {
           setError(res);
           return;
@@ -66,17 +64,6 @@ function LoginPage() {
               </ContainerLogin>
             </div>
             <div className="w-full">
-              <Label>Nome de Usuário: </Label>
-              <ContainerLogin>
-                <InputLogin
-                  placeholder="Digite o nome do seu usuário"
-                  type="text"
-                  value={username}
-                  onChange={(event) => setUsername(event.target.value)}
-                />
-              </ContainerLogin>
-            </div>
-            <div className="w-full">
               <Label>Senha: </Label>
               <ContainerLogin>
                 <InputLogin
@@ -96,7 +83,7 @@ function LoginPage() {
               </ContainerLogin>
             </div>
             <ButtonLogin
-              onClick={() => loginUser({ email, password, username })}
+              onClick={() => loginUser({ email, password })}
               disabled={!validatedInputsLogin(email, password)}
             >
               Entrar
