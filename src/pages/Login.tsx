@@ -2,31 +2,36 @@ import { Link, useNavigate } from "react-router";
 import { ContainerLogin, InputLogin } from "../components/InputGroupLogin";
 import Design from "../layout/Design";
 import ButtonLogin from "../components/ButtonLogin";
-import { validatedInputsLogin } from "../hooks/validatedInputs";
 import { DivContainerLR, DivForm, Label } from "../components/LRComponents";
 import { Eye, EyeOff } from "lucide-react";
 import ButtonEye from "../components/ButtonEye";
 import { useState } from "react";
 import { useAuth } from "../context/authContext";
-
+import { useForm } from "react-hook-form";
 export type formProps = {
   email?: string;
   password?: string;
 };
 
 function LoginPage() {
-  const { SingIn, user } = useAuth();
+  const { SingIn } = useAuth();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+
   const navigate = useNavigate();
 
   const [showPassword, setShowPassword] = useState<boolean>(true);
   const [type, setType] = useState<boolean>(true);
-  const [email, setEmail] = useState<string>("");
-  const [password, setPassword] = useState<string>("");
   const [error, setError] = useState<string>("");
 
-  function loginUser({ email, password }: formProps) {
+  function loginUser(data: formProps) {
     try {
-      if (email && password) {
+      if (data.email && data.password) {
+        const email = data.email;
+        const password = data.password;
         const res = SingIn({ email, password });
         if (res) {
           setError(res);
@@ -34,12 +39,12 @@ function LoginPage() {
         }
         navigate("/");
       }
-    } catch (error) {
-      console.log("aconteu um erro: ", error);
+    } catch (errar) {
+      console.log("aconteu um erro: ", errar);
     }
   }
 
-  console.log(user?.username);
+  console.log(errors);
 
   return (
     <Design>
@@ -58,8 +63,10 @@ function LoginPage() {
                 <InputLogin
                   placeholder="Digite seu email"
                   type="email"
-                  value={email}
-                  onChange={(event) => setEmail(event.target.value)}
+                  {...register("email", { required: true, pattern: {
+                    value: /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/,
+                    message: 'insira um endereço de e-mail válido',
+                  } })}
                 />
               </ContainerLogin>
             </div>
@@ -69,9 +76,7 @@ function LoginPage() {
                 <InputLogin
                   placeholder="Digite sua senha"
                   type={type ? "password" : "text"}
-                  name="password"
-                  value={password}
-                  onChange={(event) => setPassword(event.target.value)}
+                  {...register("password", {required: true, minLength: 7})}
                 />
                 <ButtonEye
                   type={type}
@@ -82,13 +87,14 @@ function LoginPage() {
                 />
               </ContainerLogin>
             </div>
-            <ButtonLogin
-              onClick={() => loginUser({ email, password })}
-              disabled={!validatedInputsLogin(email, password)}
-            >
+            <ButtonLogin onClick={() => handleSubmit(loginUser)()}>
               Entrar
             </ButtonLogin>
-            <p className="text-red-500 text-2xl font-bold">{error}</p>
+            <p className="text-red-500 text-2xl font-bold">
+              {errors.email?.type === "required" && "Preencha todos os campos"}
+              {errors.email?.type === "pattern" && "insira um endereço de e-mail válido"}
+              {error}
+            </p>
           </DivForm>
           <p className=" text-end text-white text-xl mt-2">
             Ainda não tem conta?{" "}
