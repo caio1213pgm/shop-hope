@@ -5,41 +5,67 @@ import { DivContainerLR, DivForm, Label } from "../components/LRComponents";
 import Design from "../layout/Design";
 import ButtonEye from "../components/ButtonEye";
 import { Eye, EyeOff } from "lucide-react";
-import { validarConfirmarSenha } from "../hooks/validatedInputs";
 import { useState } from "react";
 import { useAuth } from "../context/authContext";
+import { FieldErrors, FieldValues, useForm } from "react-hook-form";
 
 type registerProps = {
-  email: string | undefined;
-  password: string | undefined;
-  username: string | undefined;
+  email?: string;
+  password?: string;
+  confirmedPassword?: string;
+  username?: string;
 };
 
 function RegisterPage() {
+  const navigate = useNavigate();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
 
-  const navigate = useNavigate()
-
-  const [email, setEmail] = useState<string>();
-  const [password, setPassword] = useState<string>();
-  const [confirmedPassword, setConfirmedPassword] = useState<string>();
   const [type, setType] = useState<boolean>(true);
   const [showPassword, setShowPassword] = useState<boolean>(true);
-  const [username, setUsername] = useState<string>();
   const [error, setError] = useState<string>();
-  const { SingUp, user } = useAuth();
+  const { SingUp } = useAuth();
 
-  function registerUser({ email, password, username }: registerProps) {
+  function errorMessage(errors: FieldErrors<FieldValues>) {
+    if (errors.email?.type === "required") {
+      return "Preencha o campo de email";
+    } else if (errors.email?.type === "pattern") {
+      return errors.email.message?.toString();
+    } else if (errors.username?.type === "required") {
+      return "Preencha o campo de nome de usuário";
+    } else if (errors.password?.type === "required") {
+      return "Preencha o campo de senha";
+    } else if (errors.password?.type === "minLength") {
+      return "A senha deve ter pelo menos 8 caracteres";
+    }
+  }
+
+  function registerUser(data: registerProps) {
     try {
-      if (email && password && username) {
-        console.log(email, password, user);
-        const res = SingUp({ email, password, username });
-        if (res) {
-          setError(res)
-          return
+      if (
+        data.email &&
+        data.password &&
+        data.username &&
+        data.confirmedPassword
+      ) {
+        const email = data.email;
+        const password = data.password;
+        const username = data.username;
+        const confirmedPassword = data.confirmedPassword;
+        if (password === confirmedPassword) {
+          const res = SingUp({ email, password, username });
+          if (res) {
+            setError(res);
+            return;
+          }
+          alert("Usuário cadastrado com sucesso!");
+          navigate("/login");
+        } else {
+          setError("As senhas não conferem");
         }
-
-        alert("Usuário cadastrado com sucesso!")
-        navigate("/login")
       }
     } catch (error) {
       console.log("Aconteceu um erro", error);
@@ -48,7 +74,7 @@ function RegisterPage() {
 
   return (
     <Design>
-      <div className="min-h-screen bg-blue-400">
+      <div className="min-h-[calc(100vh-82px-82px)] bg-blue-400">
         <DivContainerLR>
           <DivForm>
             <div className="w-full">
@@ -56,8 +82,13 @@ function RegisterPage() {
               <ContainerLogin>
                 <InputLogin
                   placeholder="Digite seu email"
-                  type="email"
-                  onChange={(event) => setEmail(event.target.value)}
+                  {...register("email", {
+                    required: true,
+                    pattern: {
+                      value: /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/,
+                      message: "insira um endereço de e-mail válido",
+                    },
+                  })}
                 />
               </ContainerLogin>
             </div>
@@ -66,8 +97,9 @@ function RegisterPage() {
               <ContainerLogin>
                 <InputLogin
                   placeholder="Digite o nome do seu usuário"
-                  type="text"
-                  onChange={(event) => setUsername(event.target.value)}
+                  {...register("username", {
+                    required: true,
+                  })}
                 />
               </ContainerLogin>
             </div>
@@ -77,7 +109,7 @@ function RegisterPage() {
                 <InputLogin
                   placeholder="Digite sua senha"
                   type={type ? "password" : "text"}
-                  onChange={(event) => setPassword(event.target.value)}
+                  {...register("password", { required: true, minLength: 8 })}
                 />
                 <ButtonEye
                   type={type}
@@ -92,21 +124,19 @@ function RegisterPage() {
               <Label>Confirmar Senha: </Label>
               <ContainerLogin>
                 <InputLogin
-                  placeholder="Confirme sua senha"
                   type="password"
-                  onChange={(event) => setConfirmedPassword(event.target.value)}
+                  placeholder="Confirme sua senha"
+                  {...register("confirmedPassword")}
                 />
               </ContainerLogin>
             </div>
-            <ButtonLogin
-              onClick={() => registerUser({ email, password, username })}
-              disabled={
-                !validarConfirmarSenha(password, confirmedPassword, email)
-              }
-            >
+            <ButtonLogin onClick={() => handleSubmit(registerUser)()}>
               Cadastrar
             </ButtonLogin>
-            <p className="text-red-500 text-xl font-bold">{error}</p>
+            <div className="text-red-500 text-xl font-bold">
+              {error}
+              {errorMessage(errors)}
+            </div>
           </DivForm>
           <p className=" text-end text-white text-xl mt-2">
             Já tem uma conta?{" "}
