@@ -43,7 +43,7 @@ function PageProduct() {
 
   return (
     <Design>
-      <div className="bg-blue-400 flex justify-center pt-20 px-20 ">
+      <div className="bg-blue-400 flex justify-center pt-20 px-20 min-h-[calc(100vh-82px-82px)]">
         <ButtonReturn />
         <div className="bg-white px-10 py-20 rounded flex items-start">
           <img src={image?.toString()} className="w-[400px]" />

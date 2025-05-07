@@ -62,7 +62,7 @@ function Home() {
           <LoadingItems/>
         ) : (
           <ContainerProducts>
-            {products.map((product) => (
+            {products.length > 0 ? (products.map((product) => (
               <Product
                 key={product.id}
                 name={product.name}
@@ -71,7 +71,7 @@ function Home() {
                 image={product.image}
                 id={product.id}
               />
-            ))}
+            ))) : (<div><p>não foi possível achar o produto desejado</p></div>)}
           </ContainerProducts>
         )}
 
