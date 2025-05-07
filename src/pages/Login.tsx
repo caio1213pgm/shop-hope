@@ -48,7 +48,7 @@ function LoginPage() {
 
   return (
     <Design>
-      <div className="min-h-screen bg-blue-400">
+      <div className="min-h-[calc(100vh-82px-82px)] bg-blue-400">
         <DivContainerLR>
           <div className="text-center mb-5">
             <h1 className="text-5xl text-white font-medium">SHOPHOPE</h1>
