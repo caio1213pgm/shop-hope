@@ -6,10 +6,11 @@ import Product, { productProps } from "../components/Product";
 import { useSearch } from "../context/searchContext";
 import Design from "../layout/Design";
 import { useEffect, useState } from "react";
+import { Frown } from "lucide-react";
 
 function LoadingItems() {
   return (
-    <ContainerProducts>
+    <div className="flex items-center justify-center ">
       <span className="flex items-center gap-2 bg-blue-700 text-3xl text-white absolute p-2 rounded">
         Carregando itens...
         <svg
@@ -26,7 +27,18 @@ function LoadingItems() {
           <path d="M21 12a9 9 0 1 1-6.219-8.56" />
         </svg>
       </span>
-    </ContainerProducts>
+    </div>
+  );
+}
+
+function ProductNotFound() {
+  return (
+    <div className="flex items-center justify-center ">
+      <div className="flex items-center gap-2 text-white text-2xl bg-blue-700 p-2 rounded">
+        <Frown className="size-10" />
+        <p>Desculpe, o produto desejado não está disponível no momento...</p>
+      </div>
+    </div>
   );
 }
 
@@ -58,11 +70,11 @@ function Home() {
   return (
     <>
       <Design>
-        {loading ? (
-          <LoadingItems/>
-        ) : (
-          <ContainerProducts>
-            {products.length > 0 ? (products.map((product) => (
+        <ContainerProducts>
+          {loading ? (
+            <LoadingItems />
+          ) : products.length > 0 ? (
+            products.map((product) => (
               <Product
                 key={product.id}
                 name={product.name}
@@ -71,11 +83,13 @@ function Home() {
                 image={product.image}
                 id={product.id}
               />
-            ))) : (<div><p>não foi possível achar o produto desejado</p></div>)}
-          </ContainerProducts>
-        )}
+            ))
+          ) : (
+            <ProductNotFound />
+          )}
 
-        <ButtonCart />
+          <ButtonCart />
+        </ContainerProducts>
       </Design>
     </>
   );
