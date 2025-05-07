@@ -59,7 +59,7 @@ function PageCart() {
 
   return (
     <Design>
-      <div className="bg-blue-400 flex justify-center pt-20 px-20">
+      <div className="bg-blue-400 flex justify-center pt-20 px-20 min-h-[calc(100vh-82px-82px)]">
         <ButtonReturn />
         <div className="flex flex-col bg-white px-10 py-20 rounded min-h-130 min-w-250 ">
           {cart.length === 0 ? <EmptyCart /> : <TitleCart />}

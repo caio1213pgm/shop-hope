@@ -59,7 +59,7 @@ export default function AuthProvider({ children }: { children: React.ReactNode }
           setUser({ email, password, username });
           return;
         } else {
-          return "email, senha ou nome de usuário incorretos";
+          return "email ou senha ouincorretos";
         }
       } else {
         return "nenhum usuário cadastrado";

@@ -7,7 +7,7 @@ import { Eye, EyeOff } from "lucide-react";
 import ButtonEye from "../components/ButtonEye";
 import { useState } from "react";
 import { useAuth } from "../context/authContext";
-import { useForm } from "react-hook-form";
+import { FieldErrors, FieldValues, useForm } from "react-hook-form";
 export type formProps = {
   email?: string;
   password?: string;
@@ -27,6 +27,18 @@ function LoginPage() {
   const [type, setType] = useState<boolean>(true);
   const [error, setError] = useState<string>("");
 
+  function errorMesage(errors: FieldErrors<FieldValues>) {
+    if (errors.email?.type === "required") {
+      return "Preencha o campo de email";
+    } else if (errors.email?.type === "pattern") {
+      return errors.email.message?.toString();
+    } else if (errors.password?.type === "required") {
+      return "Preencha o campo de senha";
+    } else if (errors.password?.type === "minLength") {
+      return "A senha deve ter pelo menos 8 caracteres";
+    }
+  }
+
   function loginUser(data: formProps) {
     try {
       if (data.email && data.password) {
@@ -44,11 +56,9 @@ function LoginPage() {
     }
   }
 
-  console.log(errors);
-
   return (
     <Design>
-      <div className="min-h-screen bg-blue-400">
+      <div className="min-h-[calc(100vh-82px-82px)] bg-blue-400">
         <DivContainerLR>
           <div className="text-center mb-5">
             <h1 className="text-5xl text-white font-medium">SHOPHOPE</h1>
@@ -63,10 +73,13 @@ function LoginPage() {
                 <InputLogin
                   placeholder="Digite seu email"
                   type="email"
-                  {...register("email", { required: true, pattern: {
-                    value: /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/,
-                    message: 'insira um endereço de e-mail válido',
-                  } })}
+                  {...register("email", {
+                    required: true,
+                    pattern: {
+                      value: /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/,
+                      message: "insira um endereço de e-mail válido",
+                    },
+                  })}
                 />
               </ContainerLogin>
             </div>
@@ -76,7 +89,7 @@ function LoginPage() {
                 <InputLogin
                   placeholder="Digite sua senha"
                   type={type ? "password" : "text"}
-                  {...register("password", {required: true, minLength: 7})}
+                  {...register("password", { required: true, minLength: 7 })}
                 />
                 <ButtonEye
                   type={type}
@@ -90,11 +103,10 @@ function LoginPage() {
             <ButtonLogin onClick={() => handleSubmit(loginUser)()}>
               Entrar
             </ButtonLogin>
-            <p className="text-red-500 text-2xl font-bold">
-              {errors.email?.type === "required" && "Preencha todos os campos"}
-              {errors.email?.type === "pattern" && "insira um endereço de e-mail válido"}
+            <div className="text-red-500 text-2xl font-bold">
+              {errorMesage(errors)}
               {error}
-            </p>
+            </div>
           </DivForm>
           <p className=" text-end text-white text-xl mt-2">
             Ainda não tem conta?{" "}
