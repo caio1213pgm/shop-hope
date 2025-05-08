@@ -7,7 +7,9 @@ import ButtonCart from "../components/ButtonCart";
 import { itemProps } from "../context/cartContext";
 import useCart from "../context/useCart";
 import { useRef } from "react";
-import DialogContent from "../components/DialogContent";
+import DialogContentAddToCart from "../components/DialogContent"; 
+import { useAuth } from "../context/authContext";
+import DialogNotFoundUser from "../components/DialogNotFoundUser";
 function PageProduct() {
   const [searchParams] = useSearchParams();
   const name = searchParams.get("name");
@@ -17,19 +19,27 @@ function PageProduct() {
   const id = searchParams.get("id");
 
   const { addItemToCart } = useCart();
-  const diagloRef = useRef<HTMLDialogElement>(null);
+  const dialogAddToCart = useRef<HTMLDialogElement>(null);
+  const dialogNotFoundUser = useRef<HTMLDialogElement>(null);
 
-  function toggleDialog() {
-    if (!diagloRef.current) {
+
+  const { user } = useAuth();
+
+  function toggleDialog(dialog: React.RefObject<HTMLDialogElement | null>) {
+    if (!dialog.current) {
       return;
     }
 
-    diagloRef.current.hasAttribute("open")
-      ? diagloRef.current.close()
-      : diagloRef.current.showModal();
+    dialog.current.hasAttribute("open")
+      ? dialog.current.close()
+      : dialog.current.showModal();
   }
 
   function addToCart({ name, price, image, description, id }: itemProps) {
+    if(!user){
+      toggleDialog(dialogNotFoundUser)
+      return
+    }
     const item: itemProps = {
       name: name,
       price: price,
@@ -38,7 +48,7 @@ function PageProduct() {
       id: id,
     };
     addItemToCart(item);
-    toggleDialog();
+    toggleDialog(dialogAddToCart);
   }
 
   return (
@@ -60,8 +70,11 @@ function PageProduct() {
             >
               Adicionar ao carrinho
             </Button>
-            <dialog ref={diagloRef} className="m-auto outline-0 rounded-2xl">
-              <DialogContent action={() => toggleDialog()} />
+            <dialog ref={dialogAddToCart} className="m-auto outline-0 rounded-2xl">
+              <DialogContentAddToCart action={() => toggleDialog(dialogAddToCart)} />
+            </dialog>
+            <dialog ref={dialogNotFoundUser} className="m-auto outline-0 rounded-2xl">
+              <DialogNotFoundUser action={() => toggleDialog(dialogNotFoundUser)} />
             </dialog>
           </div>
         </div>

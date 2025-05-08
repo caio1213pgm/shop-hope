@@ -1,5 +1,6 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { PropsChildren } from "../layout/Design";
+import { useAuth } from "./authContext";
 
 export type itemProps = {
   name: string | null;
@@ -23,18 +24,18 @@ const CartContext = createContext<propsContext>({
 
 export default function CartProvider({ children }: PropsChildren) {
   const [cart, setCart] = useState<itemProps[]>([]);
-
+  const { user } = useAuth();
   useEffect(() => {
     try {
       const cartStorage = localStorage.getItem("cart_bd");
-      if (cartStorage) {
+      if (cartStorage && user) {
         const cart: itemProps[] = JSON.parse(cartStorage);
         setCart(cart);
       }
     } catch (error) {
       console.log("erro ao pegar itens do local storage", error);
     }
-  }, []);
+  }, [user]);
 
   function addProduct(product: itemProps) {
     localStorage.setItem("cart_bd", JSON.stringify([...cart, product]));

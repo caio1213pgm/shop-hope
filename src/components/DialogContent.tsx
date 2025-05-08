@@ -4,7 +4,7 @@ import { Store } from "lucide-react";
 import ButtonsOfDialog from "./ButtonDialog";
 
 
-function DialogContent({ action }: { action: () => void }) {
+function DialogContentAddToCart({ action }: { action: () => void }) {
   return (
     <div className="bg-blue-800 py-15 px-10">
       <button
@@ -24,4 +24,4 @@ function DialogContent({ action }: { action: () => void }) {
     </div>
   );
 }
-export default DialogContent;
+export default DialogContentAddToCart;
