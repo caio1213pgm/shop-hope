@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import { PropsChildren } from "../layout/Design";
 
 export type itemProps = {
@@ -24,7 +24,20 @@ const CartContext = createContext<propsContext>({
 export default function CartProvider({ children }: PropsChildren) {
   const [cart, setCart] = useState<itemProps[]>([]);
 
+  useEffect(() => {
+    try {
+      const cartStorage = localStorage.getItem("cart_bd");
+      if (cartStorage) {
+        const cart: itemProps[] = JSON.parse(cartStorage);
+        setCart(cart);
+      }
+    } catch (error) {
+      console.log("erro ao pegar itens do local storage", error);
+    }
+  }, []);
+
   function addProduct(product: itemProps) {
+    localStorage.setItem("cart_bd", JSON.stringify([...cart, product]));
     setCart([...cart, product]);
   }
 
@@ -33,6 +46,7 @@ export default function CartProvider({ children }: PropsChildren) {
     const indexProduct = cart.findIndex((item) => item.id === product.id);
     const newCart = [...cart];
     newCart.splice(indexProduct, 1);
+    localStorage.setItem("cart_bd", JSON.stringify(newCart));
     setCart(newCart);
   }
 
